@@ -23,3 +23,5 @@ NetEase Cloud Hot Comments Display Wall.
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/Binaryify/NeteaseCloudMusicApi?include_prereleases&label=API)
 
 因为很轻量，所以就不写缓存机制了
+
+[预览地址](https://pluginskers.github.io/#/login)
