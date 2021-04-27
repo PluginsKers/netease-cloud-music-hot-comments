@@ -15,7 +15,7 @@ export default {
 <style>
 @font-face {
   font-family: "PluginsKers";
-  src: url("https://cdn.jsdelivr.net/gh/pluginskers/ImgBed/c3b14ecc6c3882bdeb5ee4768f13cead20210307210329.woff2")
+  src: url("https://cdn.jsdelivr.net/gh/pluginskers/cdn/2021/20210427202913.woff2")
     format("woff");
 }
 
