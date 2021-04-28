@@ -9,7 +9,7 @@ let request = axios.create({
 	headers: {
 		"Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
 	},
-	withCredentials: false,
+	withCredentials: true,
 	transformRequest: [
 		data => {
 			let params = '';
