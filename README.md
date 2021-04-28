@@ -12,7 +12,7 @@ NetEase Cloud Hot Comments Display Wall.
 
 当前版本：
 
-![Version](https://img.shields.io/badge/Version-1.0.1-green)
+![Version](https://img.shields.io/github/v/release/PluginsKers/NeteaseCloudMusicWall?include_prereleases&label=Version)
 
 依赖：
 
