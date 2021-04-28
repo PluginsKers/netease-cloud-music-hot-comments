@@ -23,9 +23,6 @@ export default {
   mounted() {
     this.$request({
       url: "/recommend/songs",
-      data: {
-        cookie: this.$store.state.cookie,
-      },
     }).then((response) => {
       if (response.data && response.data.code == 200) {
         this.loader(response.data.data.dailySongs);

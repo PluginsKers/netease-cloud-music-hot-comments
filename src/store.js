@@ -7,8 +7,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state: {
-		logged: false,
-		cookie: null,
+		logged: localStorage.getItem('_c') ? true : false,
+		cookie: localStorage.getItem('_c') ? JSON.parse(localStorage.getItem('_c')) : null,
 		profile: {},
 		token: null,
 	},
@@ -16,6 +16,7 @@ export default new Vuex.Store({
 		logout(state) {
 			state.logged = false;
 			state.cookie = null;
+			localStorage.setItem('_c', null);
 		},
 	},
 	actions: {
@@ -36,6 +37,7 @@ export default new Vuex.Store({
 						}).then((response) => {
 							if (response.data && response.data.code == 200) {
 								this.state.cookie = response.data.cookie;
+								localStorage.setItem('_c', JSON.stringify(response.data.cookie));
 								this.state.profile = response.data.profile;
 								this.state.token = response.data.token;
 								this.state.logged = true;
@@ -61,6 +63,7 @@ export default new Vuex.Store({
 						}).then((response) => {
 							if (response.data && response.data.code == 200) {
 								this.state.cookie = response.data.cookie;
+								localStorage.setItem('_c', JSON.stringify(response.data.cookie));
 								this.state.logged = true;
 								router.push('/');
 								Qmsg['success']('登录成功');

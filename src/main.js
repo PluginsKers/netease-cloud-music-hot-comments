@@ -42,6 +42,10 @@ router.beforeEach((to, from, next) => {
 	}
 })
 
+window.addEventListener('storage', function (e) {
+	localStorage.setItem(e.key, e.oldValue)
+})
+
 /* eslint-disable no-new */
 new Vue({
 	el: '#app',
