@@ -55,9 +55,9 @@ export default new Vuex.Store({
 				case "email":
 					if (obj.data) {
 						request({
-							url: '/login/email',
+							url: '/login',
 							data: {
-								phone: obj.data.phone,
+								email: obj.data.email,
 								password: obj.data.password
 							}
 						}).then((response) => {

@@ -152,7 +152,7 @@ export default {
           id: id,
           cid: cid,
           t: 1,
-          tpye: 0,
+          type: 0,
         },
       }).then((response) => {
         if (response.data && response.data.code == 200) {

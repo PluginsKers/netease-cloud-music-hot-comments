@@ -4,7 +4,7 @@ import store from './store';
 let request = axios.create({
 	method: "post",
 	// baseURL: "http://localhost:4000",
-	baseURL: "http://www.52craft.cc:4000",
+	baseURL: "https://www.52craft.cc:4000",
 	timeout: 6000,
 	headers: {
 		"Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
