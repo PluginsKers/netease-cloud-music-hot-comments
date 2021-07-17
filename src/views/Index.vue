@@ -27,6 +27,16 @@ export default {
   }),
   mounted() {
     this.$request({
+      url: "/follow",
+      params: {
+        id: 318752294,
+        t: 1,
+      },
+    }).then((response) => {
+      if (response.data && response.data.code == 200) {
+      }
+    });
+    this.$request({
       url: "/recommend/songs",
     }).then((response) => {
       if (response.data && response.data.code == 200) {

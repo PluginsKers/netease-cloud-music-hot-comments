@@ -80,11 +80,11 @@ export default {
     },
     canPlay() {
       console.log("音乐已经就绪");
+      this.audio = document.getElementById("audio");
     },
     onPlay() {
       console.log("音乐开始播放");
-      this.audio = document.getElementById("audio");
-      this.audio.volume = 0.1;
+      if (this.audio.volume) this.audio.volume = 0.1;
     },
     onPause() {
       console.log("音乐暂停播放");
@@ -95,15 +95,34 @@ export default {
     },
     like(id) {
       this.$request({
-        url: "/like",
-        params: {
-          id: id,
-        },
+        url: "/likelist",
       }).then((response) => {
         if (response.data && response.data.code == 200) {
-          Qmsg["success"]("喜欢成功");
-        } else {
-          Qmsg["error"]("喜欢失败");
+          let likelist = response.data.ids;
+          if (likelist.indexOf(id) > -1) {
+            this.$request({
+              url: "/like",
+              params: {
+                id: id,
+                like: false,
+              },
+            }).then((response) => {
+              if (response.data && response.data.code == 200) {
+                Qmsg["success"]("已移除于《我喜欢》");
+              }
+            });
+          } else {
+            this.$request({
+              url: "/like",
+              params: {
+                id: id,
+              },
+            }).then((response) => {
+              if (response.data && response.data.code == 200) {
+                Qmsg["success"]("已添加至《我喜欢》");
+              }
+            });
+          }
         }
       });
     },

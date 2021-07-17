@@ -16,7 +16,7 @@ export default new Vuex.Store({
 		logout(state) {
 			state.logged = false;
 			state.cookie = null;
-			localStorage.setItem('_c', null);
+			localStorage.setItem('_c', '');
 		},
 	},
 	actions: {

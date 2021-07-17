@@ -31,6 +31,8 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.prototype.$request = request;
 
+Vue.prototype.$store = store;
+
 Vue.config.productionTip = false;
 
 router.beforeEach((to, from, next) => {

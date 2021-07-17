@@ -139,8 +139,12 @@ export default {
     before() {
       this.$parent.$refs.player.toggle("pause");
     },
-    beforeNext() {},
-    beforePrev() {},
+    beforeNext() {
+      this.$parent.$refs.player.audio = null;
+    },
+    beforePrev() {
+      this.$parent.$refs.player.audio = null;
+    },
     actived() {
       let current = this.$parent.list[this.activeElement.getAttribute("index")];
       current.url = null;

@@ -10,7 +10,7 @@
     </p>
 
     <h3>打开/关闭 帮助页面</h3>
-    <code>左滑</code>播放器 关闭 <code>右滑</code>播放器 打开
+    <code>左滑</code>播放器 关闭帮助 <code>右滑</code>播放器 打开帮助
 
     <h3>评论点赞</h3>
     <code>长按</code>评论
@@ -21,7 +21,10 @@
     <h3>评论切换</h3>
     <code>双击</code>屏幕
 
-    <p>展望未来：云贝智能代理（领取云贝&后台完成简单任务）</p>
+    <p>
+      展望未来：云贝智能代理（<span @click="sign()">领取云贝</span
+      >&后台完成简单任务）
+    </p>
 
     <h3>相关声明：</h3>
     <p>项目介绍</p>
@@ -34,6 +37,7 @@
       target="_blank"
       >https://github.com/PluginsKers/NeteaseCloudMusicWall</a
     >
+    <p><code @click="$store.commit('logout')">退出登录</code></p>
   </div>
 </template>
 
@@ -42,7 +46,39 @@ export default {
   name: "Help",
   data: () => ({}),
   mounted() {},
-  methods: {},
+  methods: {
+    sign() {
+      this.$request({
+        url: "/yunbei/sign",
+      }).then((response) => {
+        if (response.data && response.data.code == 200) {
+        } else {
+        }
+      });
+      this.$request({
+        url: "/yunbei/tasks",
+      }).then((response) => {
+        if (response.data && response.data.code == 200) {
+          for (let i of response.data.data) {
+            if (i.userTaskId != 0 && !i.completed) {
+              this.$request({
+                url: "/yunbei/task/finish",
+                params: {
+                  userTaskId: i.userTaskId,
+                },
+              }).then((response) => {
+                if (response.data && response.data.code == 200) {
+                  Qmsg["success"](`完成任务《${i.taskName}》`);
+                } else {
+                }
+              });
+            }
+          }
+        } else {
+        }
+      });
+    },
+  },
 };
 </script>
 
@@ -59,8 +95,8 @@ export default {
   bottom: 0;
   left: 20px;
   right: 20px;
-  background: rgb(255 255 255 / 80%);
-  background-image: url(https://cdn.jsdelivr.net/gh/pluginskers/cdn/2021/20210427202826.png);
+  background: rgb(255 255 255 / 90%)
+    url(https://cdn.jsdelivr.net/gh/pluginskers/cdn/2021/20210427202826.png);
   background-blend-mode: hue;
   border-radius: 4px 4px 0 0;
   padding: 20px;
@@ -74,7 +110,6 @@ export default {
     bottom: 0px;
     left: 0px;
     right: 0px;
-    background: #ffffff;
     border-radius: 0px;
     padding: 20px;
     z-index: 2;
