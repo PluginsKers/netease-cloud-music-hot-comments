@@ -1,7 +1,9 @@
 <template>
   <div class="container">
-    <component-slider v-if="loaded"></component-slider>
+    <v-touch @swiperight="help = true"> </v-touch>
+    <component-slider v-if="loaded" ref="slider"></component-slider>
     <component-player v-if="loaded" ref="player"></component-player>
+    <component-help v-show="help" ref="help"></component-help>
     <div class="loading" v-show="!loaded">页面加载中...</div>
   </div>
 </template>
@@ -9,16 +11,19 @@
 <script>
 import Slider from "@/components/Slider";
 import Player from "@/components/Player";
+import Help from "@/components/Help";
 
 export default {
   name: "Index",
   components: {
     ComponentSlider: Slider,
     ComponentPlayer: Player,
+    ComponentHelp: Help,
   },
   data: () => ({
     list: [],
     loaded: false,
+    help: false,
   }),
   mounted() {
     this.$request({

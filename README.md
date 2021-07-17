@@ -1,20 +1,8 @@
 ![review](https://cdn.jsdelivr.net/gh/pluginskers/cdn/2021/20210427203907.png)
 
-# 网易云热评墙
+# 网易云热评墙 
 
-NetEase Cloud Hot Comments Display Wall.
-
-> 这个故事还没有结束！
-
-## 项目介绍 ##
-
-继我于2019开发的网易云热评墙`NeteaseCloudHotReview`(现已废弃)
-
-当前版本：
-
-![Version](https://img.shields.io/github/v/release/PluginsKers/NeteaseCloudMusicWall?include_prereleases&label=Version)
-
-依赖：
+网易云热评墙 HotComments display Wall😃
 
 ![Nodejs](https://img.shields.io/npm/v/node?label=Nodejs)
 ![vuex](https://img.shields.io/npm/v/vuex?label=vuex)
@@ -22,12 +10,25 @@ NetEase Cloud Hot Comments Display Wall.
 ![fontawesome](https://img.shields.io/npm/v/fontawesome?label=fontawesome)
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/Binaryify/NeteaseCloudMusicApi?include_prereleases&label=API)
 
-## 开发小结 ##
+> 这个故事还没有结束！
 
-https://www.52craft.cc/archives/284/
+![Version](https://img.shields.io/github/v/release/PluginsKers/NeteaseCloudMusicWall?include_prereleases&label=Version)
 
-### 正在敲敲敲 ##
+# 环境要求 #
 
-因为很轻量，所以就不写缓存机制了
+需要 NodeJS 8.12+ 环境
 
-[预览地址](https://pluginskers.github.io/)
+# 更新日志 #
+
+[KERSの博客](https://www.52craft.cc/archives/284/)🍈
+
+# 预览 #
+
+[预览-Github](https://pluginskers.github.io/)
+
+[预览-腾讯托管](http://service-1fiq57j8-1253949189.gz.apigw.tencentcs.com/release/NeteaseCloudMusicWall#/)
+
+# License #
+
+[The MIT License (MIT)](https://github.com/PluginsKers/NeteaseCloudMusicWall/blob/master/LICENSE)
+

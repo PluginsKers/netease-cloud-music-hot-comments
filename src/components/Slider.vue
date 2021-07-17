@@ -6,36 +6,42 @@
         v-for="(obj, index) in $parent.list"
         :key="index"
         :index="index"
+        @dblclick="changeComment()"
       >
         <div class="slide__cover" v-if="obj.comments[commentIndex]">
           <div
             class="slide__background"
             :style="{
               background: `url(${obj.comments[commentIndex].user.avatarUrl})`,
+
+              transform: `scale(${likeScale})`,
             }"
           ></div>
           <div class="slide__overlay"></div>
         </div>
+
         <div class="header">
-          <font-awesome-icon icon="book" />《<span class="ablum">{{
-            obj.name
-          }}</span
-          >》
+          <font-awesome-icon icon="book" />
+          <span class="ablum">{{ obj.name }}</span>
         </div>
-        <div class="body" v-if="obj.comments[commentIndex]">
-          <p
-            class="comment"
-            @dblclick="like(obj.id, obj.comments[commentIndex].commentId)"
-          >
-            {{ obj.comments[commentIndex].content }}
-          </p>
-          <span class="author">
-            {{ obj.comments[commentIndex].user.nickname }}
-          </span>
-        </div>
-        <div class="body" v-else>
-          <p class="comment">它暂时还没有热评呢</p>
-        </div>
+
+        <v-touch
+          @press="likeComment(obj.id, obj.comments[commentIndex].commentId)"
+          @pressup="escapeLike()"
+        >
+          <div class="body" v-if="obj.comments[commentIndex]" ref="comment">
+            <p class="comment">
+              {{ obj.comments[commentIndex].content }}
+            </p>
+
+            <span class="author">
+              {{ obj.comments[commentIndex].user.nickname }}
+            </span>
+          </div>
+          <div class="body" v-else>
+            <p class="comment">他暂时还没有热评呢</p>
+          </div>
+        </v-touch>
       </div>
     </div>
   </div>
@@ -49,6 +55,7 @@ export default {
     commentIndex: Math.floor(Math.random() * 20),
     startIndex: 0,
     activeElement: null,
+    likeScale: 1,
   }),
   mounted() {
     let wrapper = this.$refs.wrapper;
@@ -113,7 +120,7 @@ export default {
         this.activeElement = this.activeElement.nextSibling;
         this.activeElement.className += " active";
       } else {
-        Qmsg["warning"]("愿美好与你环环相扣呀");
+        Qmsg["warning"]("这就是今日份温暖咯，愿美好与你环环相扣呀~");
       }
       this.actived.apply();
     },
@@ -145,22 +152,41 @@ export default {
     touchMove(event) {
       let touchY = event.changedTouches[0].clientY;
     },
-    like(id, cid) {
-      this.$request({
-        url: "/comment/like",
-        params: {
-          id: id,
-          cid: cid,
-          t: 1,
-          type: 0,
-        },
-      }).then((response) => {
-        if (response.data && response.data.code == 200) {
-          Qmsg["success"]("点赞成功");
-        } else {
-          Qmsg["error"]("点赞失败");
-        }
-      });
+    changeComment() {
+      console.log("音乐更改热评");
+      this.commentIndex = Math.floor(Math.random() * 20);
+    },
+    likeComment(id, cid) {
+      console.log("点赞该评论");
+      this.beforeTimer = setTimeout(() => {
+        this.intervalTimer = setInterval(() => {
+          this.likeScale = this.likeScale + 0.02;
+        }, 5);
+        this.touchTimer = setTimeout(() => {
+          this.$request({
+            url: "/comment/like",
+            params: {
+              id: id,
+              cid: cid,
+              t: 1,
+              type: 0,
+            },
+          }).then((response) => {
+            this.escapeLike();
+            if (response.data && response.data.code == 200) {
+              Qmsg["success"]("点赞成功");
+            } else {
+              Qmsg["error"]("点赞失败");
+            }
+          });
+        }, 1000);
+      }, 300);
+    },
+    escapeLike() {
+      clearTimeout(this.touchTimer);
+      clearTimeout(this.beforeTimer);
+      clearInterval(this.intervalTimer);
+      this.likeScale = 1;
     },
   },
 };
@@ -218,6 +244,8 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
+  background-position: center !important;
+  background-size: 30% !important;
   z-index: -1;
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "neteasecloudmusic_wall",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "NetEase Cloud Hot Comments Display Wall.",
   "author": "PluginsKers <ikers@foxmail.com>",
   "private": true,
@@ -19,6 +19,7 @@
     "vue": "^2.6.12",
     "vue-cli": "^2.9.6",
     "vue-router": "^3.0.1",
+    "vue-touch": "^2.0.0-beta.4",
     "vuex": "^3.6.2"
   },
   "devDependencies": {

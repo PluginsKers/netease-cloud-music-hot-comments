@@ -1,28 +1,33 @@
 <template>
   <div class="player">
-    <div v-if="current && current.al">
-      <img class="pic" :src="current.al.picUrl" />
-      <div class="control" v-if="current.url" @click="toggle()">
-        <font-awesome-icon :icon="status" />
-        <audio
-          id="audio"
-          :src="current.url || ''"
-          controls
-          style="display: none"
-          @canplay="canPlay"
-          @ended="onEnd"
-          @pause="onPause"
-          @play="onPlay"
-          autoplay
-          loop
-        ></audio>
+    <v-touch
+      @swiperight="$parent.help = true"
+      @swipeleft="$parent.help = false"
+    >
+      <div v-if="current && current.al">
+        <img class="pic" :src="current.al.picUrl" />
+        <div class="control" v-if="current.url" @click="toggle()">
+          <font-awesome-icon :icon="status" />
+          <audio
+            id="audio"
+            :src="current.url || ''"
+            controls
+            style="display: none"
+            @canplay="canPlay"
+            @ended="onEnd"
+            @pause="onPause"
+            @play="onPlay"
+            autoplay
+            loop
+          ></audio>
+        </div>
+        <div class="details" @dblclick="like(current.id)">
+          <p class="name">{{ current.name }}</p>
+          <div class="artist">{{ current.ar[0].name }}</div>
+        </div>
       </div>
-      <div class="details">
-        <p class="name">{{ current.name }}</p>
-        <div class="artist">{{ current.ar[0].name }}</div>
-      </div>
-    </div>
-    <div class="player__overlay" v-else>加载中...</div>
+      <div class="player__overlay" v-else>加载中...</div>
+    </v-touch>
   </div>
 </template>
 
@@ -73,14 +78,35 @@ export default {
           break;
       }
     },
-    canPlay() {},
+    canPlay() {
+      console.log("音乐已经就绪");
+    },
     onPlay() {
+      console.log("音乐开始播放");
       this.audio = document.getElementById("audio");
-      console.log("Player开始播放");
       this.audio.volume = 0.1;
     },
-    onPause() {},
-    onEnd() {},
+    onPause() {
+      console.log("音乐暂停播放");
+    },
+    onEnd() {
+      console.log("音乐播放完毕");
+      this.$parent.$refs.slider.next();
+    },
+    like(id) {
+      this.$request({
+        url: "/like",
+        params: {
+          id: id,
+        },
+      }).then((response) => {
+        if (response.data && response.data.code == 200) {
+          Qmsg["success"]("喜欢成功");
+        } else {
+          Qmsg["error"]("喜欢失败");
+        }
+      });
+    },
   },
   watch: {},
 };
@@ -98,7 +124,7 @@ export default {
   border-radius: 4px 4px 0px 0px;
   left: 50%;
   margin-left: -260px;
-  z-index: 1;
+  z-index: 3;
 }
 
 .player__overlay {

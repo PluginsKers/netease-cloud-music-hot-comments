@@ -7,7 +7,7 @@
 <script>
 export default {
   name: "App",
-  mounted(){}
+  mounted() {},
 };
 </script>
 
@@ -51,5 +51,15 @@ input {
 
 input:focus {
   outline: unset;
+}
+
+code {
+  display: inline-block;
+  border-radius: 4px;
+  background: #d6d6d6;
+  padding: 0 4px;
+  margin-right: 4px;
+  vertical-align: top;
+  word-break: break-word;
 }
 </style>

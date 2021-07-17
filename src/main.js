@@ -5,6 +5,9 @@ import App from './App';
 import router from './router';
 import store from './store';
 import request from './request';
+import VueTouch from 'vue-touch';
+
+Vue.use(VueTouch, { name: 'v-touch' });
 
 /**
  * Font Awesome SVG
@@ -17,11 +20,11 @@ import {
 } from '@fortawesome/vue-fontawesome'
 
 import {
-	faBook, faPen, faPlay, faPause
+	faBook, faPen, faPlay, faPause, faTimes, faExclamation
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
-	faBook, faPen, faPlay, faPause
+	faBook, faPen, faPlay, faPause, faTimes, faExclamation
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
