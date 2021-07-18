@@ -88,6 +88,11 @@ export default {
       qr: {},
     },
   }),
+  mounted() {
+    setTimeout(() => {
+      Qmsg["warning"]("请在进入前调整你的手机音量！");
+    }, 2000);
+  },
   methods: {
     submit() {
       this.$store.dispatch("login", {
@@ -180,7 +185,7 @@ ul.tabs li:hover {
 .github-corner svg {
   color: #e5e5e5;
   fill: var(--theme-color, #07c160);
-  height: 60px;
-  width: 60px;
+  height: 80px;
+  width: 80px;
 }
 </style>>

@@ -137,7 +137,7 @@ export default {
       this.actived.apply();
     },
     before() {
-      this.$parent.$refs.player.toggle("pause");
+    //   this.$parent.$refs.player.toggle("pause");
     },
     beforeNext() {
       this.$parent.$refs.player.audio = null;

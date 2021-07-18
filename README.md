@@ -30,5 +30,5 @@
 
 # License #
 
-[The MIT License (MIT)](https://github.com/PluginsKers/NeteaseCloudMusicWall/blob/master/LICENSE)
+[The GNU General Public License (GPL)](https://github.com/PluginsKers/NeteaseCloudMusicWall/blob/master/LICENSE)
 

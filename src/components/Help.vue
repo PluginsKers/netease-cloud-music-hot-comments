@@ -10,34 +10,38 @@
     </p>
 
     <h3>打开/关闭 帮助页面</h3>
-    <code>左滑</code>播放器 关闭帮助 <code>右滑</code>播放器 打开帮助
+    <p><code>左滑播放器</code> 关闭帮助</p>
+    <p><code>右滑播放器</code> 打开帮助</p>
 
     <h3>评论点赞</h3>
-    <code>长按</code>评论
+    <p><code>长按评论</code></p>
 
     <h3>歌曲点赞/收藏/喜欢</h3>
-    <code>双击</code>播放器任意位置
+    <p><code>双击播放器</code> 收藏</p>
 
     <h3>评论切换</h3>
-    <code>双击</code>屏幕
+    <p><code>双击屏幕</code> 进行刷新</p>
 
-    <p>
-      展望未来：云贝智能代理（<span @click="sign()">领取云贝</span
-      >&后台完成简单任务）
-    </p>
+    <h3>退出登录</h3>
+    <p><code>长按播放器</code> Tip:退出将销毁所有Cookie和本地存储</p>
+
+    <h3>展望未来</h3>
+    <p>云贝智能代理（<span @click="sign()">领取云贝</span>）</p>
+    <p>音频可视化的使用体验。</p>
 
     <h3>相关声明：</h3>
-    <p>项目介绍</p>
-    <a href="https://www.52craft.cc/archives/284/" target="_blank"
-      >https://www.52craft.cc/archives/284/</a
-    ><br />
-    <p>开源地址</p>
-    <a
-      href="https://github.com/PluginsKers/NeteaseCloudMusicWall"
-      target="_blank"
-      >https://github.com/PluginsKers/NeteaseCloudMusicWall</a
-    >
-    <p><code @click="$store.commit('logout')">退出登录</code></p>
+    <p>
+      <a href="https://www.52craft.cc/archives/284/" target="_blank"
+        >项目介绍</a
+      >
+    </p>
+    <p>
+      <a
+        href="https://github.com/PluginsKers/NeteaseCloudMusicWall"
+        target="_blank"
+        >开源地址</a
+      >
+    </p>
   </div>
 </template>
 

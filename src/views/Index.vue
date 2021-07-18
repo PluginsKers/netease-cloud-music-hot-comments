@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <v-touch @swiperight="help = true"> </v-touch>
     <component-slider v-if="loaded" ref="slider"></component-slider>
     <component-player v-if="loaded" ref="player"></component-player>
     <component-help v-show="help" ref="help"></component-help>

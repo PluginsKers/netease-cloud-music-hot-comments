@@ -14,9 +14,10 @@ export default new Vuex.Store({
 	},
 	mutations: {
 		logout(state) {
-			state.logged = false;
-			state.cookie = null;
+			this.state.logged = false;
+			this.state.cookie = null;
 			localStorage.setItem('_c', '');
+			router.push('/login');
 		},
 	},
 	actions: {

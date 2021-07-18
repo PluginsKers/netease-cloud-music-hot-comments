@@ -3,6 +3,8 @@
     <v-touch
       @swiperight="$parent.help = true"
       @swipeleft="$parent.help = false"
+      @press="logout()"
+      @pressup="escapeLogout()"
     >
       <div v-if="current && current.al">
         <img class="pic" :src="current.al.picUrl" />
@@ -95,36 +97,34 @@ export default {
     },
     like(id) {
       this.$request({
-        url: "/likelist",
+        url: "/like",
+        params: {
+          id: id,
+        },
       }).then((response) => {
         if (response.data && response.data.code == 200) {
-          let likelist = response.data.ids;
-          if (likelist.indexOf(id) > -1) {
-            this.$request({
-              url: "/like",
-              params: {
-                id: id,
-                like: false,
-              },
-            }).then((response) => {
-              if (response.data && response.data.code == 200) {
-                Qmsg["success"]("已移除于《我喜欢》");
-              }
-            });
-          } else {
-            this.$request({
-              url: "/like",
-              params: {
-                id: id,
-              },
-            }).then((response) => {
-              if (response.data && response.data.code == 200) {
-                Qmsg["success"]("已添加至《我喜欢》");
-              }
-            });
-          }
+          Qmsg["success"]("已添加至《我喜欢》");
         }
       });
+    },
+    logout() {
+      console.log("开始退出登录");
+      this.beforeTimer = setTimeout(() => {
+        Qmsg["warning"]("继续保持长按以退出登录");
+        let count = 7;
+        this.refreshTimer = setInterval(() => {
+          Qmsg["warning"]("准备退出");
+          count--;
+          if (count == 1) {
+            this.$store.commit("logout");
+            this.escapeLogout();
+          }
+        }, 1000);
+      }, 500);
+    },
+    escapeLogout() {
+      clearTimeout(this.beforeTimer);
+      clearInterval(this.refreshTimer);
     },
   },
   watch: {},
@@ -147,8 +147,9 @@ export default {
 }
 
 .player__overlay {
-  position: relative;
+  position: absolute;
   height: 100%;
+  width: 100%;
   text-align: center;
   color: #000;
   padding: 10px 0;
@@ -170,14 +171,15 @@ export default {
 
 .player .control {
   position: absolute;
-  z-index: 10010;
   right: 16px;
+  color: #fff;
   bottom: -23px;
   padding: 8px 10px 4px 10px;
   box-shadow: 0px 0px 2px 0px #558b2f;
   background: linear-gradient(145deg, #c4e759, #6de195);
   border-radius: 4px 4px 0px 0px;
   cursor: default;
+  z-index: 10010;
 }
 
 .player .control svg {
@@ -190,6 +192,10 @@ export default {
 }
 
 .player:hover .control {
+  bottom: 0px;
+}
+
+.player:hover .logout {
   bottom: 0px;
 }
 
