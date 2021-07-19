@@ -59,7 +59,6 @@ export default {
   }),
   mounted() {
     let wrapper = this.$refs.wrapper;
-
     if (wrapper) {
       this.activeElement = wrapper.children[this.startIndex];
       this.activeElement.classList += " active";
@@ -78,10 +77,10 @@ export default {
         wrapper.removeEventListener("mousemove", this.mouseMove);
         let r = mousestartY - end.clientY;
         if (r >= this.clientHeight * 0.1) {
-          console.log("Next");
+          console.log("PC端下一页");
           this.next();
         } else if (r < -(this.clientHeight * 0.1)) {
-          console.log("Prev");
+          console.log("PC端上一页");
           this.prev();
         }
       });
@@ -102,10 +101,10 @@ export default {
         wrapper.removeEventListener("touchmove", this.touchMove);
         let r = touchstartY - end.changedTouches[0].clientY;
         if (r >= this.clientHeight * 0.2) {
-          console.log("Next");
+          console.log("移动端下一页");
           this.next();
         } else if (r < -(this.clientHeight * 0.2)) {
-          console.log("Prev");
+          console.log("移动端上一页");
           this.prev();
         }
       });
@@ -136,9 +135,7 @@ export default {
       }
       this.actived.apply();
     },
-    before() {
-    //   this.$parent.$refs.player.toggle("pause");
-    },
+    before() {},
     beforeNext() {
       this.$parent.$refs.player.audio = null;
     },
@@ -146,6 +143,7 @@ export default {
       this.$parent.$refs.player.audio = null;
     },
     actived() {
+      localStorage.setItem("_n", this.activeElement.getAttribute("index"));
       let current = this.$parent.list[this.activeElement.getAttribute("index")];
       current.url = null;
       console.log("开始加载Player", current);
@@ -192,6 +190,9 @@ export default {
       clearInterval(this.intervalTimer);
       this.likeScale = 1;
     },
+  },
+  watch: {
+    activeElement() {},
   },
 };
 </script>

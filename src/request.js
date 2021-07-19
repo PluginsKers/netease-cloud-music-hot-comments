@@ -22,14 +22,15 @@ let request = axios.create({
 })
 
 request.interceptors.request.use(config => {
+	if (!config.params) config.params = {};
 	if (store.state.cookie) {
 		if (config.data) {
 			config.data.cookie = store.state.cookie;
 		} else {
-			if (!config.params) config.params = {};
 			config.params.cookie = encodeURIComponent(store.state.cookie);
 		}
 	}
+	config.params.time = new Date().getTime();
 	return config;
 }, function (error) {
 	Qmsg['error'](`出错了 ${error}`);

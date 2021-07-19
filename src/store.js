@@ -14,6 +14,19 @@ export default new Vuex.Store({
 	},
 	mutations: {
 		logout(state) {
+			let keys = document.cookie.match(/[^ =;]+(?==)/g);
+			if (keys) {
+				for (let i = keys.length; i--;) {
+					document.cookie =
+						keys[i] + "=0;path=/;expires=" + new Date(0).toUTCString();
+					document.cookie =
+						keys[i] +
+						"=0;path=/;domain=" +
+						document.domain +
+						";expires=" +
+						new Date(0).toUTCString();
+				}
+			}
 			this.state.logged = false;
 			this.state.cookie = null;
 			localStorage.setItem('_c', '');
@@ -77,7 +90,15 @@ export default new Vuex.Store({
 					}
 					break;
 				case 'qr':
-					Qmsg['error']('开发中');
+					if (obj.data.data) {
+						this.state.cookie = obj.data.data.cookie;
+						localStorage.setItem('_c', JSON.stringify(obj.data.data.cookie));
+						this.state.logged = true;
+						router.push('/');
+						Qmsg['success']('登录成功');
+					} else {
+						Qmsg['success']('登录失败-1');
+					}
 					break;
 				default:
 					Qmsg['error']('参数错误');

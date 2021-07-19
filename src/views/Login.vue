@@ -65,8 +65,10 @@
           />
         </div>
       </div>
-      <div class="qr" v-show="type == 'qr'">二维码登录</div>
-      <div class="submit" @click="submit">提交</div>
+      <div class="qr" v-show="type == 'qr'">
+        <img :src="form.qr.img" @click="QR()" />
+      </div>
+      <div class="submit" v-show="type != 'qr'" @click="submit">提交</div>
     </div>
   </div>
 </template>
@@ -75,7 +77,7 @@
 export default {
   name: "Login",
   data: () => ({
-    type: "phone",
+    type: "qr",
     form: {
       phone: {
         phone: null,
@@ -85,13 +87,18 @@ export default {
         email: null,
         password: null,
       },
-      qr: {},
+      qr: {
+        key: null,
+        img: null,
+        data: null,
+      },
     },
   }),
   mounted() {
+    if (this.type == "qr") this.QR();
     setTimeout(() => {
       Qmsg["warning"]("请在进入前调整你的手机音量！");
-    }, 2000);
+    }, 500);
   },
   methods: {
     submit() {
@@ -99,6 +106,63 @@ export default {
         type: this.type,
         data: this.form[this.type],
       });
+    },
+    QR() {
+      this.form.qr.img = null;
+      let keys = document.cookie.match(/[^ =;]+(?==)/g);
+      if (keys) {
+        for (let i = keys.length; i--; ) {
+          document.cookie =
+            keys[i] + "=0;path=/;expires=" + new Date(0).toUTCString();
+          document.cookie =
+            keys[i] +
+            "=0;path=/;domain=" +
+            document.domain +
+            ";expires=" +
+            new Date(0).toUTCString();
+        }
+      }
+      this.$request({
+        url: "/login/qr/key",
+      }).then((response) => {
+        if (response.data && response.data.code == 200) {
+          this.form.qr.key = response.data.data.unikey;
+          this.$request({
+            url: "/login/qr/create",
+            params: {
+              key: this.form.qr.key,
+              qrimg: true,
+            },
+          }).then((response) => {
+            if (response.data && response.data.code == 200) {
+              this.form.qr.img = response.data.data.qrimg;
+              this.form.qr.timer = setInterval(() => {
+                this.$request({
+                  url: "/login/qr/check",
+                  params: {
+                    key: this.form.qr.key,
+                  },
+                }).then((response) => {
+                  if (response.data && response.data.code == 803) {
+                    clearInterval(this.form.qr.timer);
+                    this.form.qr.data = response.data;
+                    this.submit();
+                  } else {
+                  }
+                });
+              }, 1000);
+            } else {
+            }
+          });
+        } else {
+        }
+      });
+    },
+  },
+  watch: {
+    type(val) {
+      if (this.form.qr.timer) clearInterval(this.form.qr.timer);
+      if (val == "qr") this.QR();
     },
   },
 };
@@ -121,6 +185,10 @@ export default {
 .login .qr {
   max-width: 400px;
   margin: 15px auto;
+}
+
+.login .qr {
+  text-align: center;
 }
 
 .login .submit {
@@ -187,5 +255,10 @@ ul.tabs li:hover {
   fill: var(--theme-color, #07c160);
   height: 80px;
   width: 80px;
+}
+
+img {
+  width: 50%;
+  margin: 50% auto;
 }
 </style>>

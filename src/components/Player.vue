@@ -110,8 +110,7 @@ export default {
     logout() {
       console.log("开始退出登录");
       this.beforeTimer = setTimeout(() => {
-        Qmsg["warning"]("继续保持长按以退出登录");
-        let count = 7;
+        let count = 6;
         this.refreshTimer = setInterval(() => {
           Qmsg["warning"]("准备退出");
           count--;
@@ -119,7 +118,7 @@ export default {
             this.$store.commit("logout");
             this.escapeLogout();
           }
-        }, 1000);
+        }, 600);
       }, 500);
     },
     escapeLogout() {
@@ -178,7 +177,6 @@ export default {
   box-shadow: 0px 0px 2px 0px #558b2f;
   background: linear-gradient(145deg, #c4e759, #6de195);
   border-radius: 4px 4px 0px 0px;
-  cursor: default;
   z-index: 10010;
 }
 

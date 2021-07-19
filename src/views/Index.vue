@@ -47,6 +47,7 @@ export default {
   },
   methods: {
     loader(data) {
+      console.log("歌单Loader", data);
       for (let a in data) {
         let c = data[a],
           b = {
@@ -84,11 +85,6 @@ export default {
 </script>
 
 <style scoped>
-* {
-  user-select: none;
-  cursor: default;
-}
-
 .loading {
   position: fixed;
   top: -60px;

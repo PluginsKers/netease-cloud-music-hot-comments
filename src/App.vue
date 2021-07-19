@@ -29,6 +29,8 @@ body {
 * {
   font-family: "PluginsKers";
   transition: all 0.1s;
+  user-select: none;
+  cursor: default;
 }
 
 label {
