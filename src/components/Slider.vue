@@ -13,7 +13,6 @@
             class="slide__background"
             :style="{
               background: `url(${obj.comments[commentIndex].user.avatarUrl})`,
-
               transform: `scale(${likeScale})`,
             }"
           ></div>
@@ -146,7 +145,7 @@ export default {
       localStorage.setItem("_n", this.activeElement.getAttribute("index"));
       let current = this.$parent.list[this.activeElement.getAttribute("index")];
       current.url = null;
-      console.log("开始加载Player", current);
+      console.log("开始加载播放器", current);
       this.$parent.$refs.player.loader(current);
     },
     mouseMove(event) {},

@@ -31,16 +31,14 @@
 
     <h3>相关声明：</h3>
     <p>
-      <a href="https://www.52craft.cc/archives/284/" target="_blank"
-        >项目介绍</a
-      >
-    </p>
-    <p>
+      <a href="https://www.52craft.cc/archives/284/" target="_blank">项目介绍</a
+      >&nbsp;
       <a
         href="https://github.com/PluginsKers/NeteaseCloudMusicWall"
         target="_blank"
         >开源地址</a
-      >
+      >&nbsp;
+      <a href="https://www.52craft.cc/" target="_blank">KERS的博客</a>
     </p>
   </div>
 </template>

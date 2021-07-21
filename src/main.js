@@ -20,11 +20,11 @@ import {
 } from '@fortawesome/vue-fontawesome'
 
 import {
-	faBook, faPen, faPlay, faPause, faTimes, faExclamation
+	faBook, faPen, faPlay, faPause, faTimes, faExclamation, faCircle
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
-	faBook, faPen, faPlay, faPause, faTimes, faExclamation
+	faBook, faPen, faPlay, faPause, faTimes, faExclamation, faCircle
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

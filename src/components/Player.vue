@@ -8,7 +8,7 @@
     >
       <div v-if="current && current.al">
         <img class="pic" :src="current.al.picUrl" />
-        <div class="control" v-if="current.url" @click="toggle()">
+        <div class="control" v-if="current.url" @click="toggleAudio()">
           <font-awesome-icon :icon="status" />
           <audio
             id="audio"
@@ -53,29 +53,30 @@ export default {
         if (response.data && response.data.code == 200) {
           current.url = response.data.data[0].url;
           this.current = current;
-          console.log("Player加载完毕", current);
-          this.toggle("play");
+          console.log("播放器加载完毕", current);
+          this.toggleAudio("play");
+          this.status = "pause";
         } else {
           Qmsg["error"]("播放失败");
         }
       });
     },
-    toggle(target = null) {
+    toggleAudio(target = null) {
       if (!this.audio) return;
       switch (target) {
         case "play":
-          this.audio.play();
           this.status = "pause";
+          this.audio.play();
           break;
         case "pause":
-          this.audio.pause();
           this.status = "play";
+          this.audio.pause();
           break;
         default:
           if (this.audio.paused) {
-            this.toggle("play");
+            this.toggleAudio("play");
           } else {
-            this.toggle("pause");
+            this.toggleAudio("pause");
           }
           break;
       }
@@ -86,7 +87,7 @@ export default {
     },
     onPlay() {
       console.log("音乐开始播放");
-      if (this.audio.volume) this.audio.volume = 0.1;
+      if (this.audio.volume) this.audio.volume = 0.05;
     },
     onPause() {
       console.log("音乐暂停播放");

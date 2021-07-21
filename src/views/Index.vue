@@ -22,7 +22,7 @@ export default {
   data: () => ({
     list: [],
     loaded: false,
-    help: false,
+    help: Number(localStorage.getItem("_n")) > 0 ? false : true,
   }),
   mounted() {
     this.$request({
