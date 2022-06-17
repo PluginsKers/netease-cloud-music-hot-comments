@@ -24,7 +24,7 @@
 
 # 预览 #
 
-[预览](https://service-dj8w6mz2-1253949189.gz.apigw.tencentcs.com/release/NeteaseCloudMusicWall#/)
+[预览](https://mw.i5res.com/)
 
 # License #
 
