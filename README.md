@@ -24,9 +24,7 @@
 
 # 预览 #
 
-[预览-Github](https://pluginskers.github.io/)
-
-[预览-腾讯托管](http://service-1fiq57j8-1253949189.gz.apigw.tencentcs.com/release/NeteaseCloudMusicWall#/)
+[预览](https://service-dj8w6mz2-1253949189.gz.apigw.tencentcs.com/release/NeteaseCloudMusicWall#/)
 
 # License #
 
