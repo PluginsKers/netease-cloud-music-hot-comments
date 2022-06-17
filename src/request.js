@@ -4,7 +4,7 @@ import store from './store';
 let request = axios.create({
 	method: "post",
 	// baseURL: "http://localhost:4000",
-	baseURL: "https://netease-cloud-music-api-one-fawn.vercel.app",
+	baseURL: "https://netease.i5res.com",
 	timeout: 6000,
 	headers: {
 		"Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
