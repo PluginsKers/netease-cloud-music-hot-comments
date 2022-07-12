@@ -98,7 +98,7 @@ export default {
   left: 20px;
   right: 20px;
   background: rgb(255 255 255 / 90%)
-    url(https://cdn.jsdelivr.net/gh/pluginskers/cdn/2021/20210427202826.png);
+    url(https://jsdelivr.pai233.top/gh/pluginskers/cdn/2021/20210427202826.png);
   background-blend-mode: hue;
   border-radius: 4px 4px 0 0;
   padding: 20px;

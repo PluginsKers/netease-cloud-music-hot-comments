@@ -1,4 +1,4 @@
-![review](https://cdn.jsdelivr.net/gh/pluginskers/cdn/2021/20210427203907.png)
+![review](https://jsdelivr.pai233.top/gh/pluginskers/cdn/2021/20210427203907.png)
 
 # 网易云热评墙 
 
