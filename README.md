@@ -20,7 +20,7 @@
 
 # 更新日志 #
 
-[KERSの博客](https://www.52craft.cc/archives/284/)🍈
+[KERSの博客](https://blog.i5res.com/2021/04/06/NeteaseCloudMusicWall/)
 
 # 预览 #
 
